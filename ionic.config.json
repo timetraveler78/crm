@@ -1,0 +1,7 @@
+{
+  "name": "crm",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
