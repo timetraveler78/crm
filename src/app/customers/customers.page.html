@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Klanten
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+      <ion-list>
+          <ion-card *ngFor="let customer of data"><a [routerLink]="['/customer/']" [queryParams]="{id: customer.id}" queryParamsHandling="merge">           
+              <ion-card-header>
+                  <ion-card-title>{{customer.firstName}} {{customer.middleName}} {{customer.lastname}}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p><ion-icon name="call"></ion-icon><a href="tel:{{customer.Phone}}">:{{customer.Phone}}</a><br>
+                  <ion-icon name="mail"></ion-icon><a href="mailto:{{customer.Email}}">:{{customer.Email}}</a></p>
+              </ion-card-content></a>
+          </ion-card>
+      </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
