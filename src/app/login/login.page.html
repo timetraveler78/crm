@@ -4,16 +4,22 @@
   </ion-navbar>
 </ion-header> -->
 
+<div class="user-photo" padding-top>
+    <ion-avatar>
+      <img [src]="'/assets/images/noavatar.png'">
+    </ion-avatar>
+  </div>
+
 <ion-list>
   <ion-item>
     <ion-label >Gebruikersnaam</ion-label>
-    <ion-input [(ngModel)]="username" type="text" value=""></ion-input>
+    <ion-input [(ngModel)]="username" type="text" placeholder="Gebruikersnaam"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label >Wachtwoord</ion-label>
-    <ion-input [(ngModel)]="password"  type="password" value=""></ion-input>
+    <ion-input [(ngModel)]="password"  type="password" placeholder="wachtwoord"></ion-input>
   </ion-item>
 
 </ion-list>
-<ion-button shape="round" color="primary" fill="outline" (click)="doLogin()">Inloggen</ion-button>
+<ion-button expand="full" fill="solid" color="primary" (click)="doLogin()">Inloggen</ion-button>

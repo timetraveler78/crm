@@ -9,6 +9,9 @@
     </ion-toolbar>
   </ion-header>
 
+    <ion-toolbar color="primary">
+      <ion-searchbar [(ngModel)]="zoeken" (ionInput)="search()"></ion-searchbar>
+    </ion-toolbar>
 <ion-content>
       <ion-list>
           <ion-card *ngFor="let customer of data"><a [routerLink]="['/customer/']" [queryParams]="{id: customer.id}" queryParamsHandling="merge">           
@@ -25,7 +28,7 @@
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
-      loadingText="Loading more data...">
+      loadingText="Bezig met laden...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

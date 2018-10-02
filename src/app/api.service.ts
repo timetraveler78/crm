@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CustomerType } from './customers/customers.page';
-
+import { AppointmentsType } from './appointments/appointments.page';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,5 +16,16 @@ export class ApiService {
   getCustomers(page:number): Observable<CustomerType[]>
   {
     return this.http.get<CustomerType[]>(this.endpoint + 'customer');
+  }
+
+
+  getCustomer(id:number): Observable<CustomerType>
+  {
+    return this.http.get<CustomerType>(this.endpoint + 'customer/?id=' + id);
+  }
+
+  getAppointments(page:number): Observable<AppointmentsType[]>
+  {
+    return this.http.get<AppointmentsType[]>(this.endpoint + 'appointment');
   }
 }

@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { InfiniteScroll } from '@ionic/angular';
 import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
+import { Routes, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { CustomerType } from '../customers/customers.page'
 
 @Component({
   selector: 'app-customer',
@@ -10,56 +13,35 @@ import { Observable } from 'rxjs';
 })
 export class CustomerPage implements OnInit {
 
+  id: number;
+ errorMessage: any;
+  public customer: CustomerType;
+
+  constructor(public Api: ApiService, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.id = params['id']
+    });
+   
+  }
+
+ 
   ngOnInit() {
+    this.getCustomer();
   }
 
+  currentUser: any;
 
-  @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-
-  constructor(public Api: ApiService) {
-    for (let i = 0; i < 30; i++) {
-      this.items.push(this.items.length);
-    }
+  getCustomer() {
+    this.Api.getCustomer(this.id)
+      .subscribe(res => { this.customer = res[0] as CustomerType; 
+        console.log(this.customer);},
+        error => this.errorMessage = <any>error);     
   }
 
-  items = [];
-
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      for (let i = 0; i < 30; i++) {
-        this.items.push(this.items.length);
-      }
-
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
-    }, 500);
-    this.getUsers();
-  }
-
-  loadData($event)
+  saveCustomer()
   {
-    this.doInfinite(this.infiniteScroll);
+    console.log("saved");
   }
 
-  toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
-  }
-
-page:number;
-data:any;
-errorMessage:any;
-  getUsers() {
-    this.Api.getCustomers(this.page)
-       .subscribe(
-         res => {
-           this.data = res;
-           console.log(res[0].id);          
-         },
-         error =>  this.errorMessage = <any>error);
-  }
-
-  
 }
 

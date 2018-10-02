@@ -10,12 +10,15 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router) { }
 
+  username:string;
+  password:string;
+
   ngOnInit() {
   }
 
    doLogin() {
      
-    this.router.navigateByUrl("/list");
+    this.router.navigateByUrl("/appointments");
   }
 
 }

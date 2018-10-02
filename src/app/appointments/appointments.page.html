@@ -4,7 +4,38 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Afspraken
+      Afspraken...
     </ion-title>
   </ion-toolbar>
+  <ion-buttons>
+     <ion-button expand="full" ><label>Gepland</label> </ion-button>
+     <ion-button expand="full" >Historie</ion-button>
+    </ion-buttons>
 </ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let appointment of data">
+        <ion-item>
+          <ion-icon name="clock" slot="start"></ion-icon>
+          <ion-label>{{appointment.Date}} {{appointment.Time}}</ion-label>
+          <ion-button fill="outline" slot="end">Bekijken</ion-button>
+        </ion-item>
+        <ion-card-content>
+         Klant naam  Wassen
+  </ion-card-content>
+    </ion-card>
+    
+    <!-- <ion-card-header>
+              <ion-card-subtitle>{{appointment.Date}} {{appointment.Time}}</ion-card-subtitle>
+                <ion-card-title>Klant naam</ion-card-title>
+            </ion-card-header> -->
+    <!-- <p><ion-icon name="call"></ion-icon><a href="tel:{{customer.Phone}}">:{{customer.Phone}}</a><br>
+                <ion-icon name="mail"></ion-icon><a href="mailto:{{customer.Email}}">:{{customer.Email}}</a></p>-->
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Bezig met laden...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

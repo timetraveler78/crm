@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { InfiniteScroll } from '@ionic/angular';
 import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
+import { Routes, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -33,16 +34,21 @@ export class CustomersPage implements OnInit {
 page:number;
 data:CustomerType[];
 errorMessage:any;
-
+searchText: string;
 getUsers() {
     this.Api.getCustomers(this.page)
        .subscribe(res => {this.data = res as CustomerType[];},
                 error =>  this.errorMessage = <any>error);
-                console.log("hier");
   }
 
+  search()
+  {
   
+  }
+
 }
+
+
 
 export interface CustomerType {
   id: number;
